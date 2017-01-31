@@ -1,0 +1,13 @@
+node_modules/
+platforms/
+plugins/
+resources/
+*.mode1v3
+*.perspectivev3
+*.pbxuser
+.DS_Store
+build/
+assets/
+manifest.json
+tsconfig.json
+tslint.json
