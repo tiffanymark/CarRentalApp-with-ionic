@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Car Rental</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <form>
+    <ion-list inset>
+
+      <h4>Create your account</h4>
+
+      <ion-item>
+        <ion-label stacked>Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Last name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Adress</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label stacked>Phone</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Birthday</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="birthday.date" name=bday ></ion-datetime>
+      </ion-item>
+
+    </ion-list>
+
+    <button ion-button block >Create</button>
+  </form>
+
+  <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
+
+</ion-content>
