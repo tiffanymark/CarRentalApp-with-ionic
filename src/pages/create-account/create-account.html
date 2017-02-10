@@ -6,49 +6,53 @@
 
 <ion-content padding>
 
-  <form>
+  <form (ngSubmit)="newAccount()">
     <ion-list inset>
 
       <h4>Create your account</h4>
 
       <ion-item>
-        <ion-label stacked>Name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label stacked>First name</ion-label>
+        <ion-input type="text" name="firstname" [(ngModel)]="user.firstname" required=""></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Last name</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="text" name="lastname" [(ngModel)]="user.lastname" required=""></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Adress</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" name="adress" [(ngModel)]="user.adress" required=""></ion-input>
       </ion-item>
     
       <ion-item>
         <ion-label stacked>Phone</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" name="phone" [(ngModel)]="user.phone" required=""></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Birthday</ion-label>
-        <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="birthday.date" name=bday ></ion-datetime>
+        <ion-datetime displayFormat="DD MMM YYYY" name="birthday" [(ngModel)]="user.birthday" required=""></ion-datetime>
       </ion-item>
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="user.email" required=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Username</ion-label>
+        <ion-input type="text" autocapitalize="none" name="username" [(ngModel)]="user.username" required=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" required=""></ion-input>
+      </ion-item>      
 
     </ion-list>
 
-    <button ion-button block >Create</button>
+    <button ion-button block type="submit">Create</button>
   </form>
 
 </ion-content>
