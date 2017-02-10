@@ -49,7 +49,8 @@ export class Login {
       console.log("LENGTH: ",data.rows.length);
       if(data.rows.length == 1){
         console.log("FOUND");
-        this.navCtrl.push(Home);
+        this.menuCtrl.enable(true,"logon");
+        this.navCtrl.setRoot(Home);
       }
       else{
         let alert = this.alertCtrl.create({

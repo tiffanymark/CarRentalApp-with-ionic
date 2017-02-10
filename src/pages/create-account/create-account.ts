@@ -52,7 +52,7 @@ export class CreateAccount {
         }, (error) => {
             console.log("ERROR: " + JSON.stringify(error.err));
         });
-    this.navCtrl.push(Login);
+    this.navCtrl.setRoot(Login);
 
   }
   
