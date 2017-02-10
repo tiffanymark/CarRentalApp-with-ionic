@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ActionSheetController, MenuController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Login } from '../pages/login/login';
-import { CreateAccount } from '../pages/create-account/create-account';
 import { Home } from '../pages/home/home';
-import { Page2 } from '../pages/page2/page2';
 
 
 @Component({
@@ -18,7 +16,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController, public menuCtrl: MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,5 +39,34 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout(){
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Are you sure you want to log out?',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Log Out',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'log out' : null,
+          handler: () => {
+            this.menuCtrl.close();
+            this.menuCtrl.enable(false,"logon")
+            this.nav.setRoot(Login);
+            console.log('Delete clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          icon: !this.platform.is('ios') ? 'close' : null,
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

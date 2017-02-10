@@ -31,13 +31,7 @@ export class Login {
       this.db.openDatabase({
           name: "CarRental.db",
           location: "default"
-      }).then(() => {
-          this.db.executeSql("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, adress TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
-            console.log("TABLE CREATED: ", data);
-          }, (error) => {
-              console.error("Unable to execute sql", error);
-          })
-        }, (error) => {
+      }).then(() => {}, (error) => { 
           console.error("Unable to open database", error);
         });
     });
