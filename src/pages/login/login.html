@@ -5,30 +5,29 @@
 </ion-header>
 
 <ion-content padding>
-  <div padding>
-  <h3>Login</h3>
-  </div>
 
-  <ion-list inset>
+  <form (ngSubmit)="login()">
+    <ion-list inset>
 
-    <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <h3>Login</h3>
+      
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <ion-input type="text" autocapitalize="none" name="username" [(ngModel)]="user.username" ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" ></ion-input>
+      </ion-item>
 
+    </ion-list>
+
+      <button ion-button block type="submit" >Sign In</button>
+    </form>
+    
     <div padding>
-      <button ion-button block >Sign In</button>
+        <a (click)="createAccount()">Or create your account</a>
     </div>
-
-     <a (click)="createAccount()">Or create your account</a>
-
-  </ion-list>
-
-  <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
-
+  
 </ion-content>
