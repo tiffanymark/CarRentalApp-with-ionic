@@ -1,16 +1,13 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Car Rental</ion-title>
-  </ion-navbar>
+  
 </ion-header>
 
 <ion-content padding>
-
   <form (ngSubmit)="login()">
     <ion-list inset>
-
-      <h3>Login</h3>
-      
+      <div padding>
+      <img src="assets/img/icon-car.PNG" width="75" height="75"/>
+      </div>
       <ion-item>
         <ion-label>Username</ion-label>
         <ion-input type="text" autocapitalize="none" name="username" [(ngModel)]="user.username" required ></ion-input>
@@ -23,11 +20,11 @@
 
     </ion-list>
 
-      <button ion-button block type="submit" [disabled]="invalidLoginForm()" >Sign In</button>
+      <button ion-button outline type="submit" [disabled]="invalidLoginForm()" >Sign In</button>
     </form>
     
     <div padding>
         <a (click)="createAccount()">Or create your account</a>
     </div>
-  
+
 </ion-content>

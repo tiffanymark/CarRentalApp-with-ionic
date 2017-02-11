@@ -54,7 +54,7 @@ export class MyApp {
             this.menuCtrl.close();
             this.menuCtrl.enable(false,"logon")
             this.nav.setRoot(Login);
-            console.log('Delete clicked');
+            console.log('Log out clicked');
           }
         },
         {

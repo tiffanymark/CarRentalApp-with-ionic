@@ -21,9 +21,8 @@ export class Login {
     email: '',
     username: '',
     password: ''
-  }
+  };
 
-  userFirstname : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, public alertCtrl: AlertController) {
     this.menuCtrl.enable(false,"logon");
@@ -33,7 +32,12 @@ export class Login {
       this.db.openDatabase({
           name: "CarRental.db",
           location: "default"
-      }).then(() => {}, (error) => { 
+      }).then(() => {this.db.executeSql("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, adress TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
+              console.log("TABLE CREATED: ", data);
+          }, (error) => {
+              console.error("Unable to execute sql", error);
+          })
+        }, (error) => { 
           console.error("Unable to open database", error);
         });
     });
@@ -66,8 +70,6 @@ export class Login {
         console.error("Unable to execute sql", error);
     });
   }
-
-  
   
   createAccount(){
     this.navCtrl.push(CreateAccount);

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Car Rental</ion-title>
+    <ion-title>Create your account</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,9 +8,6 @@
 
   <form (ngSubmit)="newAccount()">
     <ion-list inset>
-
-      <h4>Create your account</h4>
-
       <ion-item>
         <ion-label stacked>First name</ion-label>
         <ion-input type="text" name="firstname" [(ngModel)]="user.firstname" required ></ion-input>
@@ -52,7 +49,7 @@
 
     </ion-list>
 
-    <button ion-button block type="submit" [disabled]="invalidCreateAccountForm()" >Create</button>
+    <button ion-button outline type="submit" [disabled]="invalidCreateAccountForm()">Create</button>
   </form>
 
 </ion-content>
