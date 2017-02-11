@@ -13,17 +13,17 @@
       
       <ion-item>
         <ion-label>Username</ion-label>
-        <ion-input type="text" autocapitalize="none" name="username" [(ngModel)]="user.username" ></ion-input>
+        <ion-input type="text" autocapitalize="none" name="username" [(ngModel)]="user.username" required ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input type="password" name="password" [(ngModel)]="user.password" ></ion-input>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" required ></ion-input>
       </ion-item>
 
     </ion-list>
 
-      <button ion-button block type="submit" >Sign In</button>
+      <button ion-button block type="submit" [disabled]="invalidLoginForm()" >Sign In</button>
     </form>
     
     <div padding>
