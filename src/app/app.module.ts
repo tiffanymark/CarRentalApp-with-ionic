@@ -4,7 +4,7 @@ import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { CreateAccount } from '../pages/create-account/create-account';
 import { Home } from '../pages/home/home';
-import { Page2 } from '../pages/page2/page2';
+import { Localization } from '../pages/localization/localization';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { Page2 } from '../pages/page2/page2';
     Login,
     CreateAccount,
     Home,
-    Page2
+    Localization
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +23,7 @@ import { Page2 } from '../pages/page2/page2';
     Login,
     CreateAccount,
     Home,
-    Page2
+    Localization
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
