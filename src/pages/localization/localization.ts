@@ -39,17 +39,22 @@ export class Localization {
 
         GoogleMap.isAvailable().then(() => {
 
-          this.map = new GoogleMap('map_canvas');
+          this.map = new GoogleMap('map_canvas',{
+                'backgroundColor': 'white',
+                'controls': {
+                    'compass': true,
+                    'myLocationButton': true,
+                    'zoom': true
+                }
+          });
           this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
 
             this._zone.run(() => {
               let carRental = new GoogleMapsLatLng(-23.461791,-46.874861);
-              let user = new GoogleMapsLatLng(position.coords.latitude,position.coords.longitude);
 
               let positionCarRental: CameraPosition = {
                 target: carRental,
                 zoom: 10,
-                tilt: 28
               };
 
               this.map.moveCamera(positionCarRental);
@@ -59,21 +64,10 @@ export class Localization {
                 title: 'Car Rental'
               };
 
-              let markerOptionsU: GoogleMapsMarkerOptions = {
-                position: user,
-                icon: 'assets/img/position.png',
-                title: 'You'
-              };
-
               this.map.addMarker(markerOptionsCR)
                 .then((markerCR: GoogleMapsMarker) => {
                   markerCR.showInfoWindow();
                 });
-
-              this.map.addMarker(markerOptionsU)
-                .then((markerU: GoogleMapsMarker) => {
-                  markerU.showInfoWindow();
-                }); 
             });
           });
         });
