@@ -2,11 +2,11 @@
   
 </ion-header>
 
-<ion-content padding>
+<ion-content class="no-scroll" padding>
   <form (ngSubmit)="login()">
     <ion-list inset>
       <div padding>
-      <img src="assets/img/icon-car.PNG" width="75" height="75"/>
+      <img src="assets/img/car.png" width="126" height="175"/>
       </div>
       <ion-item>
         <ion-label>Username</ion-label>
@@ -20,11 +20,11 @@
 
     </ion-list>
 
-      <button ion-button outline type="submit" [disabled]="invalidLoginForm()" >Sign In</button>
+      <button ion-button block color="light2" type="submit" [disabled]="invalidLoginForm()" >Sign In</button>
     </form>
     
     <div padding>
-        <a (click)="createAccount()">Or create your account</a>
+        <a color="light3" (click)="createAccount()">Or create your account</a>
     </div>
 
 </ion-content>
