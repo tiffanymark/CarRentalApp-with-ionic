@@ -15,7 +15,7 @@ export class CreateAccount {
   public user = {
     firstname: '',
     lastname: '',
-    adress: '',
+    address: '',
     phone: '',
     birthday: '2017-01-01',
     email: '',
@@ -32,7 +32,7 @@ export class CreateAccount {
           name: "CarRental.db",
           location: "default"
       }).then(() => {
-          this.db.executeSql("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, adress TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
+          this.db.executeSql("CREATE TABLE IF NOT EXISTS user_account (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
               console.log("TABLE CREATED: ", data);
           }, (error) => {
               console.error("Unable to execute sql", error);
@@ -45,13 +45,13 @@ export class CreateAccount {
   }
 
   invalidCreateAccountForm(){
-    if(this.user.firstname.length == 0 || this.user.lastname.length == 0 || this.user.adress.length == 0 || this.user.phone.length == 0 || this.user.birthday.length == 0 || this.user.email.length == 0 || this.user.username.length == 0 || this.user.password.length == 0) return true;
+    if(this.user.firstname.length == 0 || this.user.lastname.length == 0 || this.user.address.length == 0 || this.user.phone.length == 0 || this.user.birthday.length == 0 || this.user.email.length == 0 || this.user.username.length == 0 || this.user.password.length == 0) return true;
             return false;
     }
 
   newAccount(){
-    this.db.executeSql("INSERT INTO user (firstname, lastname, adress, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [this.user.firstname,this.user.lastname,this.user.adress,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password]).then((data) => {
-            console.log(this.user.firstname,this.user.lastname,this.user.adress,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password);
+    this.db.executeSql("INSERT INTO user_account (firstname, lastname, address, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password]).then((data) => {
+            console.log(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password);
 
             console.log("INSERTED: " + JSON.stringify(data));
         }, (error) => {

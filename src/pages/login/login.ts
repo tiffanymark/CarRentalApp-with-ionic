@@ -15,7 +15,7 @@ export class Login {
   public user = {
     firstname: '',
     lastname: '',
-    adress: '',
+    address: '',
     phone: '',
     birthday: '',
     email: '',
@@ -32,7 +32,7 @@ export class Login {
       this.db.openDatabase({
           name: "CarRental.db",
           location: "default"
-      }).then(() => {this.db.executeSql("CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, adress TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
+      }).then(() => {this.db.executeSql("CREATE TABLE IF NOT EXISTS user_account (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
               console.log("TABLE CREATED: ", data);
           }, (error) => {
               console.error("Unable to execute sql", error);
@@ -50,7 +50,7 @@ export class Login {
   }
 
   login(){
-    this.db.executeSql("SELECT * FROM user WHERE username = ? AND password = ?", [this.user.username, this.user.password]).then((data) => {
+    this.db.executeSql("SELECT * FROM user_account WHERE username = ? AND password = ?", [this.user.username, this.user.password]).then((data) => {
       console.log("LENGTH: ",data.rows.length);
       if(data.rows.length == 1){
         console.log("FOUND");
