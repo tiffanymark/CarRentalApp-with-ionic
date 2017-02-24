@@ -61,7 +61,7 @@ export class Localization {
 
               let markerOptionsCR: GoogleMapsMarkerOptions = {
                 position: carRental,
-                title: 'Car Rental'
+                title: 'Car Rental\nAv. Marte, 489'
               };
 
               this.map.addMarker(markerOptionsCR)
