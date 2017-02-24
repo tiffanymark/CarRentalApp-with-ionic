@@ -5,6 +5,7 @@ import { Login } from '../pages/login/login';
 import { CreateAccount } from '../pages/create-account/create-account';
 import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
+import { Profile } from '../pages/profile/profile';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { Localization } from '../pages/localization/localization';
     Login,
     CreateAccount,
     Home,
-    Localization
+    Localization,
+    Profile
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,8 @@ import { Localization } from '../pages/localization/localization';
     Login,
     CreateAccount,
     Home,
-    Localization
+    Localization,
+    Profile
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

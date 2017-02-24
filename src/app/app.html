@@ -1,15 +1,20 @@
 <ion-menu id="logon" [content]="content">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="danger2">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <ion-list-header color="light">Explore</ion-list-header>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
+      <ion-list-header color="light" style="color: #A4A4A4">Explore</ion-list-header>
+        <button menuClose ion-item *ngFor="let pe of pages_explore" (click)="openPage(pe)">
+          {{pe.title}}
+        </button>
+
+        <ion-list-header color="light" style="color: #A4A4A4">Account</ion-list-header>
+        <button menuClose ion-item *ngFor="let pa of pages_account" (click)="openPage(pa)">
+          {{pa.title}}
         </button>
 
       <ion-list-header color="light"></ion-list-header>

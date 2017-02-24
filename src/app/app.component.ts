@@ -5,6 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Login } from '../pages/login/login';
 import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
+import { Profile } from '../pages/profile/profile';
 
 
 @Component({
@@ -15,15 +16,21 @@ export class MyApp {
 
   rootPage: any = Login;
 
-  pages: Array<{title: string, component: any}>;
+  pages_explore: Array<{title: string, component: any}>;
+
+  pages_account: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController, public menuCtrl: MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
+    this.pages_explore = [
       { title: 'Home', component: Home },
-      { title: 'Localization', component: Localization},
+      { title: 'Localization', component: Localization }
+    ];
+
+    this.pages_account = [
+      { title: 'Profile', component: Profile}
     ];
 
   }
@@ -51,7 +58,7 @@ export class MyApp {
         {
           text: 'Log Out',
           role: 'destructive',
-          icon: !this.platform.is('ios') ? 'log out' : null,
+          icon: !this.platform.is('ios') ? 'power' : null,
           handler: () => {
             this.menuCtrl.close();
             this.menuCtrl.enable(false,"logon")
