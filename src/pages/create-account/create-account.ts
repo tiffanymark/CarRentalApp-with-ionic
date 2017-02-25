@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController, Platform} from 'ionic-angular';
-import { SQLite } from 'ionic-native';
+import { Database } from '../../providers/database';
 import { Login } from '../login/login';
 
 
@@ -9,8 +9,6 @@ import { Login } from '../login/login';
   templateUrl: 'create-account.html'
 })
 export class CreateAccount {
-
-  public db: SQLite;
 
   public user = {
     firstname: '',
@@ -23,24 +21,9 @@ export class CreateAccount {
     password: ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, private database: Database) {
+    
     this.menuCtrl.enable(false,"logon");
-
-    this.platform.ready().then(() => {
-    this.db = new SQLite();
-      this.db.openDatabase({
-          name: "CarRental.db",
-          location: "default"
-      }).then(() => {
-          this.db.executeSql("CREATE TABLE IF NOT EXISTS user_account (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
-              console.log("TABLE CREATED: ", data);
-          }, (error) => {
-              console.error("Unable to execute sql", error);
-          })
-        }, (error) => {
-          console.error("Unable to open database", error);
-        });
-    });
 
   }
 
@@ -50,15 +33,10 @@ export class CreateAccount {
     }
 
   newAccount(){
-    this.db.executeSql("INSERT INTO user_account (firstname, lastname, address, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password]).then((data) => {
-            console.log(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password);
-
-            console.log("INSERTED: " + JSON.stringify(data));
-        }, (error) => {
-            console.log("ERROR: " + JSON.stringify(error.err));
-        });
-    this.navCtrl.setRoot(Login);
-
+    this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((data) => {
+      this.navCtrl.setRoot(Login);
+    });
+    
   }
   
 
