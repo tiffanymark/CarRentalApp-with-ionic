@@ -35,7 +35,8 @@ export class Login {
 
   login(){
     this.database.userAuth(this.user.username,this.user.password).then((data) => {
-      if(data == 1){
+      console.log("USER ID: ",data);
+      if(data != null){
           console.log("FOUND");
           this.menuCtrl.enable(true,"logon");
           this.navCtrl.setRoot(Home);

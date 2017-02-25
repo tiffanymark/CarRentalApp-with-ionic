@@ -29,7 +29,6 @@ export class Database {
         console.error("Unable to open database ", error);
       }); 
     });
-  
   }
 
   tryInit(){
@@ -40,12 +39,15 @@ export class Database {
           });
   }
 
-
   userAuth(username,password): Promise<any>{
     return this.db.executeSql("SELECT * FROM user_account WHERE username = ? AND password = ?", [username, password]).then((data) => {
       console.log("LENGTH: ", data.rows.length);
       if(data.rows.length == 1){
-        return 1;
+        console.log("USER ID: ", data.rows.item(0).id);
+        return data.rows.item(0).id;
+      }
+      else{
+        return null;
       }
     });
   }
@@ -57,9 +59,8 @@ export class Database {
     }, (error) => {
         console.log("ERROR: " + JSON.stringify(error.err));
     });
-
   }
 
-
+  
 
 }
