@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Database } from '../providers/database';
+import { LocalStorage } from '../providers/local-storage';
 import { Login } from '../pages/login/login';
 import { CreateAccount } from '../pages/create-account/create-account';
 import { Home } from '../pages/home/home';
@@ -29,6 +30,6 @@ import { Profile } from '../pages/profile/profile';
     Localization,
     Profile
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database, LocalStorage]
 })
 export class AppModule {}

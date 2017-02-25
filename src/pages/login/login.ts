@@ -3,6 +3,7 @@ import { NavController, NavParams, MenuController, Platform, AlertController } f
 import { Home } from  '../home/home';
 import { CreateAccount } from '../create-account/create-account';
 import { Database } from '../../providers/database';
+import { LocalStorage } from '../../providers/local-storage';
 
 @Component({
   selector: 'page-login',
@@ -22,7 +23,7 @@ export class Login {
   };
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, public alertCtrl: AlertController, private database: Database) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, public alertCtrl: AlertController, private database: Database, private localStorage: LocalStorage) {
 
     this.menuCtrl.enable(false,"logon");
     
@@ -38,6 +39,7 @@ export class Login {
       console.log("USER ID: ",data);
       if(data != null){
           console.log("FOUND");
+          this.localStorage.userId(data);
           this.menuCtrl.enable(true,"logon");
           this.navCtrl.setRoot(Home);
         }
