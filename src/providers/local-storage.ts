@@ -9,6 +9,8 @@ export class LocalStorage {
 
   id: any;
 
+  logon: Boolean;
+
   constructor() {
 
     this.storage = new Storage();
@@ -21,6 +23,14 @@ export class LocalStorage {
 
   getUserId(): Promise<any>{
     return this.storage.get("user_id");
+  }
+
+  setUserLogon(logon){
+    this.storage.set("user_logon", logon);
+  }
+
+  getSetUserLogon(): Promise<any>{
+    return this.storage.get("user_logon");
   }
 
 }

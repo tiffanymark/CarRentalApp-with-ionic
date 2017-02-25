@@ -16,8 +16,6 @@ import { LocalStorage } from '../providers/local-storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Login;
-
   pages_explore: Array<{title: string, component: any}>;
 
   pages_account: Array<{title: string, component: any}>;
@@ -43,6 +41,16 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      this.localStorage.getSetUserLogon().then((data)=>{
+        console.log("USER LOGON STATUS: ", data);
+        if(data == true){
+          this.nav.setRoot(Home);
+        }
+        else{
+          this.nav.setRoot(Login);
+        }
+      });
+      
     });
   }
 
@@ -63,6 +71,7 @@ export class MyApp {
           icon: !this.platform.is('ios') ? 'power' : null,
           handler: () => {
             this.localStorage.setUserId(null);
+            this.localStorage.setUserLogon(false);
             this.menuCtrl.close();
             this.menuCtrl.enable(false,"logon")
             this.nav.setRoot(Login);

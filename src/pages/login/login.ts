@@ -40,6 +40,7 @@ export class Login {
       if(data != null){
           console.log("FOUND");
           this.localStorage.setUserId(data);
+          this.localStorage.setUserLogon(true);
           this.menuCtrl.enable(true,"logon");
           this.navCtrl.setRoot(Home);
         }
