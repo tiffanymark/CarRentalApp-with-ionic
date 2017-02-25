@@ -7,6 +7,8 @@ import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
 import { Profile } from '../pages/profile/profile';
 
+import { LocalStorage } from '../providers/local-storage';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +22,7 @@ export class MyApp {
 
   pages_account: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController, public menuCtrl: MenuController) {
+  constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController, public menuCtrl: MenuController, private localStorage: LocalStorage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -60,6 +62,7 @@ export class MyApp {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'power' : null,
           handler: () => {
+            this.localStorage.setUserId(null);
             this.menuCtrl.close();
             this.menuCtrl.enable(false,"logon")
             this.nav.setRoot(Login);

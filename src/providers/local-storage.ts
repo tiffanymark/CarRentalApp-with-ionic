@@ -15,7 +15,7 @@ export class LocalStorage {
 
   }
 
-  userId(id){
+  setUserId(id){
     this.storage.set("user_id", id);
   }
 

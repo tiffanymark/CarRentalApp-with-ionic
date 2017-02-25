@@ -39,7 +39,7 @@ export class Login {
       console.log("USER ID: ",data);
       if(data != null){
           console.log("FOUND");
-          this.localStorage.userId(data);
+          this.localStorage.setUserId(data);
           this.menuCtrl.enable(true,"logon");
           this.navCtrl.setRoot(Home);
         }
