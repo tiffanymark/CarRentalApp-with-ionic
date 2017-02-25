@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Database } from '../../providers/database';
+import { LocalStorage } from '../../providers/local-storage';
 
 @Component({
   selector: 'page-profile',
@@ -7,9 +9,36 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Profile {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  users: Array<{
+    firstname: string,
+    lastname: string,
+    address: string,
+    phone: string,
+    birthday: string,
+    email: string,
+    username: string,
+    password: string
+  }>;
+
+  id : any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage) {
     
-    
+    this.localStorage.getUserId().then((data) => { 
+      this.database.searchUser(data).then((data) => {
+        this.users = [{
+          firstname: data.firstname,
+          lastname: data.lastname,
+          address: data.address,
+          phone: data.phone,
+          birthday: data.birthday,
+          email: data.email,
+          username: data.username,
+          password: data.password
+        }];
+      });
+    });
+
   }
 
 

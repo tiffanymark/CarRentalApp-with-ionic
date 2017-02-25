@@ -8,6 +8,7 @@ export class Database {
 
   public db: SQLite;
 
+  id: any;
   firstname: string;
   lastname: string;
   address: string;
@@ -61,6 +62,11 @@ export class Database {
     });
   }
 
+  searchUser(id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM user_account WHERE id = ?", [id]).then((data) => {
+      return data.rows.item(0);
+    });
+  }
   
 
 }
