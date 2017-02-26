@@ -25,7 +25,7 @@
     
       <ion-item>
         <ion-label stacked>Phone</ion-label>
-        <ion-input type="text" name="phone" [(ngModel)]="user.phone" required ></ion-input>
+        <ion-input type="text" name="phone" [(ngModel)]="user.phone" [textMask]="{mask: mask}" required ></ion-input>
       </ion-item>
 
       <ion-item>

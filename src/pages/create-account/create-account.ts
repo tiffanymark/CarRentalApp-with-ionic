@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, Platform} from 'ionic-angular';
+import { NavController, NavParams, MenuController, Platform } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { Login } from '../login/login';
 
@@ -21,9 +21,13 @@ export class CreateAccount {
     password: ''
   }
 
+  public mask: Array<string | RegExp>
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, private database: Database) {
     
     this.menuCtrl.enable(false,"logon");
+
+    this.mask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   }
 
@@ -33,6 +37,9 @@ export class CreateAccount {
     }
 
   newAccount(){
+    if(this.user.phone.toString().length > 15){
+      this.user.phone = this.user.phone.slice(0,15);
+    }
     this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((data) => {
       this.navCtrl.setRoot(Login);
     });

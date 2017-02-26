@@ -1,6 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextMaskModule } from '../../node_modules/angular2-text-mask/dist/angular2TextMask';
 import { Database } from '../providers/database';
 import { LocalStorage } from '../providers/local-storage';
 import { Login } from '../pages/login/login';
@@ -19,7 +22,11 @@ import { Profile } from '../pages/profile/profile';
     Profile
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    BrowserModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    TextMaskModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
