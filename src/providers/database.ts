@@ -67,6 +67,14 @@ export class Database {
       return data.rows.item(0);
     });
   }
+
+  updateUserAccount(address,phone,email,id): Promise<any>{
+    return this.db.executeSql("UPDATE user_account SET address = ?, phone = ?, email = ? WHERE id = ?", [address,phone,email,id]).then((data) => {
+      console.log("UPDATED: ");
+    }, (error) => {
+      console.error("Unable to execute sql: ", error);
+    });
+  }
   
 
 }

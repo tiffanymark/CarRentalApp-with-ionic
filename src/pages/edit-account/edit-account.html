@@ -8,7 +8,7 @@
     </ion-buttons>
      <ion-title></ion-title>
     <ion-buttons end>
-      <button ion-button color="danger2" [disabled]="noChange()" style="font-weight: bold" (click)="save()" >
+      <button ion-button color="danger2" type="submit" [disabled]="noChange()" style="font-weight: bold" (click)="save()" >
         Save
       </button>
     </ion-buttons>
@@ -16,8 +16,37 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
+  <form (ngSubmit)="newAccount()">
+  <ion-list inset no-lines>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar item-left>
+          <img src="assets/img/avatar.jpg">
+        </ion-avatar>
+        <h2>{{user.firstname}} {{user.lastname}}</h2>
+        <p>{{user.username}}</p>
+    </ion-item>
+  </ion-list>
 
+    <ion-list inset>
+      <ion-item *ngFor="let user of users">
+        <ion-label stacked>Address</ion-label>
+        <ion-input type="text" name="address" autocapitalize="words" [(ngModel)]="user.address" >{{user.address}}</ion-input>
+      </ion-item>
+
+      <ion-item *ngFor="let user of users">
+        <ion-label stacked>Phone</ion-label>
+        <ion-input type="text" name="phone" [(ngModel)]="user.phone" [textMask]="{mask: mask}" >{{user.phone}}</ion-input>
+      </ion-item>
+
+      <ion-item *ngFor="let user of users">
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text" name="email" autocapitalize="none" [(ngModel)]="user.email" >{{user.email}}</ion-input>
+      </ion-item>
+
+    </ion-list>
+
+  </form>
 
 </ion-content>

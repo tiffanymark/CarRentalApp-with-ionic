@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ModalController, Events } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
 import { EditAccount } from '../edit-account/edit-account';
@@ -22,7 +22,7 @@ export class Profile {
 
   id : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController, public events: Events) {
     
     this.localStorage.getUserId().then((data) => { 
       this.database.searchUser(data).then((data) => {
@@ -36,6 +36,10 @@ export class Profile {
           username: data.username
         }];
       });
+    });
+
+    this.events.subscribe('reloadProfile',() => {
+      this.navCtrl.setRoot(Profile);
     });
 
   }

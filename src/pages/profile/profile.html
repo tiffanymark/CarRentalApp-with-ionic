@@ -16,29 +16,31 @@
 
   <ion-card>
 
-  <ion-card-header>
+    <ion-card-header>
+      <ion-item *ngFor="let user of users">
+      <ion-avatar item-left>
+        <img src="assets/img/avatar.jpg">
+      </ion-avatar>
+      <h2>{{user.firstname}} {{user.lastname}}</h2>
+      <p>{{user.username}}</p>
+    </ion-item>
+    </ion-card-header>
+
     <ion-item *ngFor="let user of users">
-    <ion-avatar item-left>
-      <img src="assets/img/avatar.jpg">
-    </ion-avatar>
-    <h2>{{user.firstname}} {{user.lastname}}</h2>
-    <p>{{user.username}}</p>
-   </ion-item>
-  </ion-card-header>
+      {{user.address}}
+    </ion-item>
 
-    
-    
-      <ion-item *ngFor="let user of users">
-        {{user.address}}
-      </ion-item>
+    <ion-item *ngFor="let user of users">
+      {{user.phone}}
+    </ion-item>
 
-      <ion-item *ngFor="let user of users">
-        {{user.phone}}
-      </ion-item>
+    <ion-item *ngFor="let user of users">
+      {{user.birthday}}
+    </ion-item>
 
-      <ion-item *ngFor="let user of users">
-        {{user.birthday}}
-      </ion-item>
+    <ion-item *ngFor="let user of users">
+      {{user.email}}
+    </ion-item>
 
   </ion-card>
 
