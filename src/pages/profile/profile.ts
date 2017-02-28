@@ -17,14 +17,18 @@ export class Profile {
     phone: string,
     birthday: string,
     email: string,
-    username: string
+    username: string,
+    photo: string
   }>;
 
   id : any;
 
+  defaultPhotoPath: string = "assets/img/avatar.jpg";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController, public events: Events) {
     
     this.localStorage.getUserId().then((data) => { 
+      this.id = data
       this.database.searchUser(data).then((data) => {
         this.users = [{
           firstname: data.firstname,
@@ -33,7 +37,8 @@ export class Profile {
           phone: data.phone,
           birthday: data.birthday,
           email: data.email,
-          username: data.username
+          username: data.username,
+          photo: data.photo
         }];
       });
     });
@@ -47,6 +52,15 @@ export class Profile {
   editAccount(){
     let modal = this.modalCtrl.create(EditAccount);
     modal.present();
+  }
+
+  pathForImage(){
+    if(this.users[0].photo == null){
+      return this.defaultPhotoPath;
+    }
+    else{
+      return this.users[0].photo;
+    }
   }
 
 

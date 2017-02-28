@@ -17,6 +17,7 @@ export class Database {
   email: string;
   username: string;
   password: string;
+  photoPath: string;
 
   constructor(public platform: Platform) {
     this.platform.ready().then(() => {
@@ -31,9 +32,9 @@ export class Database {
       }); 
     });
   }
-
+  
   tryInit(){
-    this.db.executeSql("CREATE TABLE IF NOT EXISTS user_account (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT)", {}).then((data) => {
+    this.db.executeSql("CREATE TABLE IF NOT EXISTS UserAccount (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT, photo TEXT)", {}).then((data) => {
               console.log("TABLE CREATED: ", data);
           }, (error) => {
               console.error("Unable to execute sql ", error);
@@ -41,7 +42,7 @@ export class Database {
   }
 
   userAuth(username,password): Promise<any>{
-    return this.db.executeSql("SELECT * FROM user_account WHERE username = ? AND password = ?", [username, password]).then((data) => {
+    return this.db.executeSql("SELECT * FROM UserAccount WHERE username = ? AND password = ?", [username, password]).then((data) => {
       console.log("LENGTH: ", data.rows.length);
       if(data.rows.length == 1){
         console.log("USER ID: ", data.rows.item(0).id);
@@ -54,7 +55,7 @@ export class Database {
   }
 
   createUser(firstname,lastname,address,phone,birthday,email,username,password): Promise<any>{
-    return this.db.executeSql("INSERT INTO user_account (firstname, lastname, address, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [firstname,lastname,address,phone,birthday,email,username,password]).then((data) => {
+    return this.db.executeSql("INSERT INTO UserAccount (firstname, lastname, address, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [firstname,lastname,address,phone,birthday,email,username,password]).then((data) => {
       console.log(firstname,lastname,address,phone,birthday,email,username,password);
       console.log("INSERTED: " + JSON.stringify(data));
     }, (error) => {
@@ -63,18 +64,25 @@ export class Database {
   }
 
   searchUser(id): Promise<any>{
-    return this.db.executeSql("SELECT * FROM user_account WHERE id = ?", [id]).then((data) => {
+    return this.db.executeSql("SELECT * FROM UserAccount WHERE id = ?", [id]).then((data) => {
       return data.rows.item(0);
     });
   }
 
   updateUserAccount(address,phone,email,id): Promise<any>{
-    return this.db.executeSql("UPDATE user_account SET address = ?, phone = ?, email = ? WHERE id = ?", [address,phone,email,id]).then((data) => {
-      console.log("UPDATED: ");
+    return this.db.executeSql("UPDATE UserAccount SET address = ?, phone = ?, email = ? WHERE id = ?", [address,phone,email,id]).then((data) => {
+      console.log("UPDATED ");
     }, (error) => {
       console.error("Unable to execute sql: ", error);
     });
   }
   
+  saveProfilePhoto(photoPath,id): Promise<any>{
+    return this.db.executeSql("UPDATE UserAccount SET photo = ? WHERE id = ?",[photoPath,id]).then((data) => {
+      console.log("PHOTO SAVED: ", photoPath);
+    }, (error) => {
+      console.error("Unable to save photo: ", error);
+    });
+  }
 
 }

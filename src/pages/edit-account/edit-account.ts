@@ -28,6 +28,12 @@ export class EditAccount {
 
   lastImage: string = null;
 
+  photoPath: string;
+  defaultPhotoPath: string = "assets/img/avatar.jpg";
+  actualPhotoPath: string;
+  photoExistence: Boolean;
+  newPhotoPath: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public menuCtrl: MenuController, public events: Events, private localStorage : LocalStorage, private database: Database, public actionSheetCtrl: ActionSheetController, public  platform: Platform, public toastCtrl: ToastController) {
     this.menuCtrl.enable(false, "logon");
 
@@ -45,6 +51,7 @@ export class EditAccount {
           email: data.email,
           username: data.username
         }]
+        this.verifyPhotoExistence();
       });
     });
 
@@ -57,12 +64,19 @@ export class EditAccount {
 
   save(){
     this.menuCtrl.enable(true, "logon");
+
     if(this.users[0].phone.toString().length > 15){
       this.users[0].phone = this.users[0].phone.slice(0,15);
     }
     this.database.updateUserAccount(this.users[0].address, this.users[0].phone, this.users[0].email,this.id).then((data) => {
       console.log("UPDATED USER ACCOUNT");
     });
+
+    this.database.saveProfilePhoto(this.newPhotoPath,this.id).then((data) => {
+      console.log("SAVED NEW PHOTO ", data);
+    });
+   
+
     this.events.publish('reloadProfile');
     this.navCtrl.pop();
   }
@@ -94,7 +108,7 @@ export class EditAccount {
 
   takePicture(sourceType) {
     var options = {
-      quality: 70,
+      quality: 50,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
@@ -114,7 +128,7 @@ export class EditAccount {
         this.copyFileToLocalDirectory(correctPath, currentName, this.createFileName());
       }
     }, (err) => {
-      this.presentToast('Error while selecting image.');
+      console.error("Error while choosing photo: ", err);
     });
   }
 
@@ -143,11 +157,33 @@ export class EditAccount {
   }
   
   pathForImage(img) {
-    if (img === null) {
-      return 'assets/img/avatar.jpg';
-    } else {
+    if(img != null){
+      this.newPhotoPath = cordova.file.dataDirectory + img;
       return cordova.file.dataDirectory + img;
     }
+    else if(this.photoExistence == true) {
+      this.newPhotoPath = this.actualPhotoPath;
+      return this.actualPhotoPath;
+    } 
+    else if(this.photoExistence == false){
+      return this.defaultPhotoPath;
+    }
+    else if(img == null){
+      return this.defaultPhotoPath;
+    }
+  }
+
+  verifyPhotoExistence(){
+    this.database.searchUser(this.id).then((data) => {
+      if(data == null){
+        this.lastImage = null;
+        this.photoExistence = false;
+      }
+      else{
+        this.actualPhotoPath = data.photo;
+        this.photoExistence = true;
+      }
+    });
   }
 
 }
