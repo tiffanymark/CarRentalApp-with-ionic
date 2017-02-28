@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, Platform } from 'ionic-angular';
+import { NavController, NavParams, MenuController, Platform, ToastController } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { Login } from '../login/login';
 
@@ -23,7 +23,7 @@ export class CreateAccount {
 
   public mask: Array<string | RegExp>
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, private database: Database) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform, private database: Database, public toastCtrl: ToastController) {
     
     this.menuCtrl.enable(false,"logon");
 
@@ -40,10 +40,25 @@ export class CreateAccount {
     if(this.user.phone.toString().length > 15){
       this.user.phone = this.user.phone.slice(0,15);
     }
-    this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((data) => {
-      this.navCtrl.setRoot(Login);
-    });
     
+    this.database.verifyUsernameIfExists(this.user.username).then((data) =>{
+      if(data){
+        let toast = this.toastCtrl.create({
+          message: "This username is taken by another account.",
+          duration: 2500,
+          position: 'top',
+          dismissOnPageChange: true,
+          cssClass: "toast-css"
+        });
+        toast.present();
+      }
+      else{
+        this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((data) => {
+          this.navCtrl.setRoot(Login);
+        });
+      }
+    });    
+
   }
   
 
