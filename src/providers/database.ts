@@ -77,11 +77,11 @@ export class Database {
     });
   }
   
-  saveProfilePhoto(photoPath,id): Promise<any>{
+  editProfilePhoto(photoPath,id): Promise<any>{
     return this.db.executeSql("UPDATE UserAccount SET photo = ? WHERE id = ?",[photoPath,id]).then((data) => {
-      console.log("PHOTO SAVED: ", photoPath);
+      console.log("PHOTO EDITED: ", photoPath);
     }, (error) => {
-      console.error("Unable to save photo: ", error);
+      console.error("Unable to edit photo: ", error);
     });
   }
 

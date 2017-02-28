@@ -72,11 +72,11 @@ export class EditAccount {
       console.log("UPDATED USER ACCOUNT");
     });
 
-    this.database.saveProfilePhoto(this.newPhotoPath,this.id).then((data) => {
+    this.database.editProfilePhoto(this.newPhotoPath,this.id).then((data) => {
       console.log("SAVED NEW PHOTO ", data);
     });
-   
-
+    
+    
     this.events.publish('reloadProfile');
     this.navCtrl.pop();
   }
@@ -85,6 +85,15 @@ export class EditAccount {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Change profile photo',
       buttons: [
+        {
+          text: 'Remove Photo',
+          role: 'destructive',
+          handler: () => {
+            this.newPhotoPath = null;
+            this.lastImage = null;
+            this.photoExistence = null;
+          }
+        },
         {
           text: 'Take Photo',
           handler: () => {
