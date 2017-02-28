@@ -54,6 +54,17 @@ export class Database {
     });
   }
 
+  verifyUsernameIfExists(username): Promise<any>{
+    return this.db.executeSql("SELECT * FROM UserAccount WHERE username = ?", [username]).then((data) => {
+      if(data.rows.length == 1){
+        return true;
+      } 
+      else {
+        return false;
+      }
+    });
+  }
+
   createUser(firstname,lastname,address,phone,birthday,email,username,password): Promise<any>{
     return this.db.executeSql("INSERT INTO UserAccount (firstname, lastname, address, phone, birthday, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [firstname,lastname,address,phone,birthday,email,username,password]).then((data) => {
       console.log(firstname,lastname,address,phone,birthday,email,username,password);
