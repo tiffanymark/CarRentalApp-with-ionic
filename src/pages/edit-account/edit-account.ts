@@ -118,6 +118,9 @@ export class EditAccount {
   takePicture(sourceType) {
     var options = {
       quality: 50,
+      targetWidth: 300,
+      targetHeight: 300,
+      allowEdit: true,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
