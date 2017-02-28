@@ -19,7 +19,7 @@
     <ion-card-header>
       <ion-item *ngFor="let user of users">
       <ion-avatar item-left>
-        <img src="{{pathForImage()}}">
+        <img class="profile-photo" src="{{pathForImage()}}">
       </ion-avatar>
       <h2>{{user.firstname}} {{user.lastname}}</h2>
       <p>{{user.username}}</p>

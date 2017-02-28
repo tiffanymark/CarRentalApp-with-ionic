@@ -25,7 +25,7 @@
     <ion-item *ngFor="let user of users" >
       
       <ion-avatar item-left>
-        <img src="{{pathForImage(lastImage)}}">
+        <img class="profile-photo" src="{{pathForImage(lastImage)}}">
         <p style="text-align: center;">
           <a ion-text color="danger2" style="font-size: 12px;" (click)="chooseProfilePhoto()">edit</a>
         <p>
