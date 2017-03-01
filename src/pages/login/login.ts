@@ -35,11 +35,11 @@ export class Login {
   }
 
   login(){
-    this.database.userAuth(this.user.username,this.user.password).then((data) => {
-      console.log("USER ID: ",data);
-      if(data != null){
+    this.database.userAuth(this.user.username,this.user.password).then((user_id) => {
+      console.log("USER ID: ", user_id);
+      if(user_id != null){
           console.log("FOUND");
-          this.localStorage.setUserId(data);
+          this.localStorage.setUserId(user_id);
           this.localStorage.setUserLogon(true);
           this.menuCtrl.enable(true,"logon");
           this.navCtrl.setRoot(Home);

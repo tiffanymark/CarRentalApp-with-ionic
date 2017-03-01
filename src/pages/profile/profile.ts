@@ -27,18 +27,18 @@ export class Profile {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController, public events: Events) {
     
-    this.localStorage.getUserId().then((data) => { 
-      this.id = data
-      this.database.searchUser(data).then((data) => {
+    this.localStorage.getUserId().then((user_id) => { 
+      this.id = user_id;
+      this.database.searchUser(this.id).then((user) => {
         this.users = [{
-          firstname: data.firstname,
-          lastname: data.lastname,
-          address: data.address,
-          phone: data.phone,
-          birthday: data.birthday,
-          email: data.email,
-          username: data.username,
-          photo: data.photo
+          firstname: user.firstname,
+          lastname: user.lastname,
+          address: user.address,
+          phone: user.phone,
+          birthday: user.birthday,
+          email: user.email,
+          username: user.username,
+          photo: user.photo
         }];
       });
     });

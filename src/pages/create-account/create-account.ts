@@ -40,7 +40,7 @@ export class CreateAccount {
     if(this.user.phone.toString().length > 15){
       this.user.phone = this.user.phone.slice(0,15);
     }
-    this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((data) => {
+    this.database.createUser(this.user.firstname,this.user.lastname,this.user.address,this.user.phone,this.user.birthday,this.user.email,this.user.username,this.user.password).then((user) => {
       this.navCtrl.setRoot(Login);
     });
     

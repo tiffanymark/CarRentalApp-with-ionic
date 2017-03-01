@@ -39,17 +39,17 @@ export class EditAccount {
 
     this.mask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-    this.localStorage.getUserId().then((data) => {
-      this.id = data;
-      this.database.searchUser(data).then((data)=>{
+    this.localStorage.getUserId().then((user_id) => {
+      this.id = user_id;
+      this.database.searchUser(this.id).then((user)=>{
         this.users = [{
-          firstname: data.firstname,
-          lastname: data.lastname,
-          address: data.address,
-          phone: data.phone,
-          birthday: data.birthday,
-          email: data.email,
-          username: data.username
+          firstname: user.firstname,
+          lastname: user.lastname,
+          address: user.address,
+          phone: user.phone,
+          birthday: user.birthday,
+          email: user.email,
+          username: user.username
         }]
         this.verifyPhotoExistence();
       });
@@ -186,13 +186,13 @@ export class EditAccount {
   }
 
   verifyPhotoExistence(){
-    this.database.searchUser(this.id).then((data) => {
-      if(data == null){
+    this.database.searchUser(this.id).then((user) => {
+      if(user.photo == null){
         this.lastImage = null;
         this.photoExistence = false;
       }
       else{
-        this.actualPhotoPath = data.photo;
+        this.actualPhotoPath = user.photo;
         this.photoExistence = true;
       }
     });
