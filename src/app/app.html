@@ -12,7 +12,12 @@
           {{pe.title}}
         </button>
 
-        <ion-list-header color="light" style="color: #A4A4A4">Account</ion-list-header>
+      <ion-list-header color="light" style="color: #A4A4A4">Store</ion-list-header>
+        <button menuClose ion-item *ngFor="let pst of pages_store" (click)="openPage(pst)">
+          {{pst.title}}
+        </button>
+
+      <ion-list-header color="light" style="color: #A4A4A4">Account</ion-list-header>
         <button menuClose ion-item *ngFor="let pa of pages_account" (click)="openPage(pa)">
           {{pa.title}}
         </button>

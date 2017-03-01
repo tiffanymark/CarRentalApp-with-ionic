@@ -8,6 +8,7 @@ import { TextMaskModule } from '../../node_modules/angular2-text-mask/dist/angul
 
 import { Database } from '../providers/database';
 import { LocalStorage } from '../providers/local-storage';
+import { Car } from '../providers/car';
 
 import { Login } from '../pages/login/login';
 import { CreateAccount } from '../pages/create-account/create-account';
@@ -15,6 +16,7 @@ import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
 import { Profile } from '../pages/profile/profile';
 import { EditAccount } from '../pages/edit-account/edit-account';
+import { Category } from '../pages/category/category';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { EditAccount } from '../pages/edit-account/edit-account';
     Home,
     Localization,
     Profile,
-    EditAccount
+    EditAccount,
+    Category
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -41,8 +44,9 @@ import { EditAccount } from '../pages/edit-account/edit-account';
     Home,
     Localization,
     Profile,
-    EditAccount
+    EditAccount,
+    Category
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database, LocalStorage]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database, LocalStorage, Car]
 })
 export class AppModule {}

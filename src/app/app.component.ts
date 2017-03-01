@@ -6,6 +6,7 @@ import { Login } from '../pages/login/login';
 import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
 import { Profile } from '../pages/profile/profile';
+import { Category } from '../pages/category/category';
 
 import { LocalStorage } from '../providers/local-storage';
 
@@ -18,6 +19,8 @@ export class MyApp {
 
   pages_explore: Array<{title: string, component: any}>;
 
+  pages_store: Array<{title: string, component: any}>;
+
   pages_account: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public actionsheetCtrl: ActionSheetController, public menuCtrl: MenuController, private localStorage: LocalStorage) {
@@ -26,6 +29,10 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages_explore = [
       { title: 'Home', component: Home },
+      { title: 'Categories', component: Category }
+    ];
+
+    this.pages_store = [
       { title: 'Localization', component: Localization }
     ];
 
