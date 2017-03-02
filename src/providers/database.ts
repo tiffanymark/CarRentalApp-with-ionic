@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 export class Database {
 
   public db: SQLite;
-
+  
   constructor(public platform: Platform) {
     this.platform.ready().then(() => {
     this.db = new SQLite();
@@ -100,6 +100,23 @@ export class Database {
       return category.rows.item(0);
     }, (error) => {
       console.error("UNABLE TO FIND CATEGORY: ", JSON.stringify(error));
+    });
+  }
+
+  tryInitCar(){
+   this.db.executeSql("CREATE TABLE IF NOT EXISTS Car (id INTEGER PRIMARY KEY AUTOINCREMENT, category INTEGER, name TEXT, brand TEXT, size TEXT, gearshift TEXT, ac BOOLEAN, door INTEGER, abs BOOLEAN, airbag BOOLEAN, quantity INTEGER, photo TEXT)", {}).then((data) => {
+        console.log("TABLE Car CREATED: ", data);
+    }, (error) => {
+        console.error("Unable to execute sql CAR ", error);
+    });
+  }
+
+  listCarsByCategory(category): Promise<any>{
+    return this.db.executeSql("SELECT * FROM Car WHERE category = ? ORDER BY brand ASC", [category]).then((cars) => {
+      console.log("CARS LIST: ", JSON.stringify(cars));
+      return cars;
+    }, (error) => {
+      console.error("Unable to list cars: ", JSON.stringify(error));
     });
   }
 

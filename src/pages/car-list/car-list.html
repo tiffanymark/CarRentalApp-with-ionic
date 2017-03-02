@@ -8,8 +8,30 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background">
 
-  
+  <ion-card *ngFor="let car of cars">
+
+    <img src={{car.photo}} height="240px" width="300px"/>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{car.name}}
+      </ion-card-title>
+      <p>
+        {{car.brand}}
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col text-center>
+      <button ion-button clear color="danger2" icon-left>
+        <ion-icon name='list-box' isActive="false"></ion-icon>
+        More Details
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
 
 </ion-content>
