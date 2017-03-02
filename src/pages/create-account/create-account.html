@@ -10,17 +10,17 @@
     <ion-list inset>
       <ion-item>
         <ion-label stacked>First name</ion-label>
-        <ion-input type="text" name="firstname" [(ngModel)]="user.firstname" required ></ion-input>
+        <ion-input type="text" name="firstname" autocapitalize="words" [(ngModel)]="user.firstname" required ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Last name</ion-label>
-        <ion-input type="text" name="lastname" [(ngModel)]="user.lastname" required ></ion-input>
+        <ion-input type="text" name="lastname" autocapitalize="words" [(ngModel)]="user.lastname" required ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Address</ion-label>
-        <ion-input type="text" name="address" [(ngModel)]="user.address" required ></ion-input>
+        <ion-input type="text" name="address" autocapitalize="words" [(ngModel)]="user.address" required ></ion-input>
       </ion-item>
     
       <ion-item>

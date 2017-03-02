@@ -19,6 +19,8 @@ export class Database {
   password: string;
   photoPath: string;
 
+  category: number;
+
   constructor(public platform: Platform) {
     this.platform.ready().then(() => {
     this.db = new SQLite();
@@ -52,6 +54,17 @@ export class Database {
         return null;
       }
     });
+  }
+
+  verifyUsernameIfExists(username): Promise<any>{
+     return this.db.executeSql("SELECT * FROM UserAccount WHERE username = ?", [username]).then((data) => {
+       if(data.rows.length == 1){
+         return true;
+       } 
+       else {
+         return false;
+       }
+     });
   }
 
   createUser(firstname,lastname,address,phone,birthday,email,username,password): Promise<any>{
