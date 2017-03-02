@@ -17,6 +17,7 @@ import { Localization } from '../pages/localization/localization';
 import { Profile } from '../pages/profile/profile';
 import { EditAccount } from '../pages/edit-account/edit-account';
 import { Category } from '../pages/category/category';
+import { CarList } from '../pages/car-list/car-list';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { Category } from '../pages/category/category';
     Localization,
     Profile,
     EditAccount,
-    Category
+    Category,
+    CarList
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -45,7 +47,8 @@ import { Category } from '../pages/category/category';
     Localization,
     Profile,
     EditAccount,
-    Category
+    Category,
+    CarList
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database, LocalStorage, Car]
 })
