@@ -7,10 +7,6 @@ export class LocalStorage {
 
   storage: any;
 
-  id: any;
-
-  logon: Boolean;
-
   constructor() {
 
     this.storage = new Storage();
@@ -31,6 +27,14 @@ export class LocalStorage {
 
   getSetUserLogon(): Promise<any>{
     return this.storage.get("user_logon");
+  }
+
+  setCategorySelected(category_id){
+    this.storage.set("category_id", category_id);
+  }
+
+  getCategorySelected(): Promise<any>{
+    return this.storage.get("category_id");
   }
 
 }

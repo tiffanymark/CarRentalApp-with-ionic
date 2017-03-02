@@ -8,19 +8,6 @@ export class Database {
 
   public db: SQLite;
 
-  id: any;
-  firstname: string;
-  lastname: string;
-  address: string;
-  phone: string;
-  birthday: string;
-  email: string;
-  username: string;
-  password: string;
-  photoPath: string;
-
-  category: number;
-
   constructor(public platform: Platform) {
     this.platform.ready().then(() => {
     this.db = new SQLite();
@@ -28,14 +15,15 @@ export class Database {
           name: "CarRental.db",
           location: "default"
       }).then(() => {
-        this.tryInit();
+        this.tryInitUser();
+        this.tryInitCategory();
       }, (error) => {
         console.error("Unable to open database ", JSON.stringify(error.err));
       }); 
     });
   }
   
-  tryInit(){
+  tryInitUser(){
     this.db.executeSql("CREATE TABLE IF NOT EXISTS UserAccount (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, address TEXT, phone TEXT, birthday TEXT, email TEXT, username TEXT, password TEXT, photo TEXT)", {}).then((data) => {
               console.log("TABLE CREATED: ", JSON.stringify(data));
           }, (error) => {
@@ -95,6 +83,23 @@ export class Database {
       console.log("PHOTO EDITED: ", JSON.stringify(data));
     }, (error) => {
       console.error("Unable to edit photo: ", JSON.stringify(error.err));
+    });
+  }
+
+  tryInitCategory(){
+    this.db.executeSql("CREATE TABLE IF NOT EXISTS Category (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)", {}).then((data) => {
+        console.log("TABLE Category CREATED: ", data);
+    }, (error) => {
+        console.error("Unable to execute sql CATEGORY ", error);
+    });
+  }
+
+  searchCategory(id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM Category WHERE id = ?", [id]).then((category) => {
+      console.log("CATEGORY: ", JSON.stringify(category));
+      return category.rows.item(0);
+    }, (error) => {
+      console.error("UNABLE TO FIND CATEGORY: ", JSON.stringify(error));
     });
   }
 

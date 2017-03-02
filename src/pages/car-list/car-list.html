@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Car List</ion-title>
+    <ion-title *ngFor="let category of categories">{{category.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-
+  
 
 </ion-content>
