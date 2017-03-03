@@ -13,8 +13,8 @@ export class LocalStorage {
 
   }
 
-  setUserId(id){
-    this.storage.set("user_id", id);
+  setUserId(user_id){
+    this.storage.set("user_id", user_id);
   }
 
   getUserId(): Promise<any>{
@@ -35,6 +35,14 @@ export class LocalStorage {
 
   getCategorySelected(): Promise<any>{
     return this.storage.get("category_id");
+  }
+
+  setCarSelected(car_id){
+    this.storage.set("car_id",car_id);
+  }
+
+  getCarSelected(): Promise<any>{
+    return this.storage.get("car_id");
   }
 
 }

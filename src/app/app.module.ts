@@ -18,6 +18,7 @@ import { Profile } from '../pages/profile/profile';
 import { EditAccount } from '../pages/edit-account/edit-account';
 import { Category } from '../pages/category/category';
 import { CarList } from '../pages/car-list/car-list';
+import { CarDetails } from '../pages/car-details/car-details';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CarList } from '../pages/car-list/car-list';
     Profile,
     EditAccount,
     Category,
-    CarList
+    CarList,
+    CarDetails
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -48,7 +50,8 @@ import { CarList } from '../pages/car-list/car-list';
     Profile,
     EditAccount,
     Category,
-    CarList
+    CarList,
+    CarDetails
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database, LocalStorage, Car]
 })

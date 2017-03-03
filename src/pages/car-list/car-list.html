@@ -1,8 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title *ngFor="let category of categories">{{category.name}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -25,7 +22,7 @@
 
     <ion-row no-padding>
       <ion-col text-center>
-      <button ion-button clear color="danger2" icon-left>
+      <button ion-button clear color="danger2" (click)="moreDetails(car.id)" icon-left>
         <ion-icon name='list-box' isActive="false"></ion-icon>
         More Details
       </button>

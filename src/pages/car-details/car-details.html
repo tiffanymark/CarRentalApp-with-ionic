@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="background">
+
+  <ion-card *ngFor="let car of cars">
+
+    <img src={{car.photo}} height="240px" width="300px"/>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{car.name}}
+      </ion-card-title>
+      <p>
+        {{car.brand}}
+      </p>
+
+      <div class="table">
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>Size</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">{{car.size}}</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>Gearshift</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">{{car.gearshift}}</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>Air Conditioner</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">
+              <ion-icon name='close-circle' *ngIf="!car.ac" color="danger2" isActive="false"></ion-icon>
+              <ion-icon name='checkmark-circle' *ngIf="car.ac" color="secondary2" isActive="false"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>Doors</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">{{car.door}}</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>ABS</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">
+              <ion-icon name='close-circle' *ngIf="!car.abs" color="danger2" isActive="false"></ion-icon>
+              <ion-icon name='checkmark-circle' *ngIf="car.abs" color="secondary2" isActive="false"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="names"><b>Airbag</b></div>
+          </ion-col>
+          <ion-col>
+            <div class="values">
+              <ion-icon name='close-circle' *ngIf="!car.airbag" color="danger2" isActive="false"></ion-icon>
+              <ion-icon name='checkmark-circle' *ngIf="car.airbag" color="secondary2" isActive="false"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
+

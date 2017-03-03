@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
+import { CarDetails } from '../car-details/car-details'
 
 @Component({
   selector: 'page-car-list',
@@ -12,6 +13,7 @@ export class CarList {
   categories: Array<{ id: number, name: string }>;
 
   cars: Array<{
+    id: number,
     name: string,
     brand: string,
     photo: string
@@ -29,6 +31,7 @@ export class CarList {
           this.cars = [];
           for(let i = 0; i < carsList.rows.length; i++){
             this.cars.push({
+              id: carsList.rows.item(i).id,
               name: carsList.rows.item(i).name,
               brand: carsList.rows.item(i).brand,
               photo: carsList.rows.item(i).photo
@@ -38,6 +41,11 @@ export class CarList {
       });
     });
 
+  }
+
+  moreDetails(car_id){
+    this.localStorage.setCarSelected(car_id);
+    this.navCtrl.push(CarDetails);
   }
 
 }

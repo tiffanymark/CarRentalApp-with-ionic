@@ -120,4 +120,13 @@ export class Database {
     });
   }
 
+  searchCar(id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM Car WHERE id = ?", [id]).then((car) => {
+      console.log("CAR FOUND: ", JSON.stringify(car));
+      return car.rows.item(0);
+    }, (error) => {
+      console.error("Unable to find car: ", JSON.stringify(error));
+    });
+  }
+
 }
