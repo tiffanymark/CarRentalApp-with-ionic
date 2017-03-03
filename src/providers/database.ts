@@ -16,7 +16,7 @@ export class Database {
           location: "default"
       }).then(() => {
         this.tryInitUser();
-        this.tryInitCategory();
+        this.tryInitFavoriteCar();
       }, (error) => {
         console.error("Unable to open database ", JSON.stringify(error.err));
       }); 
@@ -126,6 +126,41 @@ export class Database {
       return car.rows.item(0);
     }, (error) => {
       console.error("Unable to find car: ", JSON.stringify(error));
+    });
+  }
+
+  tryInitFavoriteCar(){
+    this.db.executeSql("CREATE TABLE IF NOT EXISTS FavoriteCar (id INTEGER PRIMARY KEY AUTOINCREMENT, user INTEGER, car INTEGER)", {}).then((data) => {
+      console.log("TABLE FavoriteCar CREATED", JSON.stringify(data));
+    }, (error) => {
+      console.error("Unable to create FavoriteCar table: ", JSON.stringify(error));
+    });
+  }
+
+  saveFavoriteCar(user_id,car_id): Promise<any>{
+    return this.db.executeSql("INSERT INTO FavoriteCar (user,car) VALUES (?,?)", [user_id,car_id]).then((data) => {
+      console.log("FAVORITE CAR INSERTED: ", JSON.stringify(data));
+    }, (error) => {
+      console.error("FAVORITE CAR WAS NOT INSERTED: ", JSON.stringify(error));
+    });
+  }
+
+  searchFavoriteCarIfExists(user_id,car_id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM FavoriteCar WHERE user = ? AND car = ?", [user_id,car_id]).then((favoriteCar) => {
+      if(favoriteCar.rows.length == 1){
+        return true;
+      }
+      else { 
+        return false;
+      }
+    });
+  }
+
+  removeFavoriteCar(user_id,car_id): Promise<any>{
+    return this.db.executeSql("DELETE FROM FavoriteCar WHERE user = ? AND car = ?", [user_id,car_id]).then((favoriteCar) => {
+      console.log("FAVORITE CAR DELETED: ", JSON.stringify(favoriteCar));
+    }, (error) => {
+      console.error("UNABLE TO DELETE FAVORITE CAR: ", JSON.stringify(error));
     });
   }
 

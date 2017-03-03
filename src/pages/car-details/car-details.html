@@ -1,11 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Details</ion-title>
+    <ion-title>{{category}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="danger2" (click)="favoriteCar()">
+        <ion-icon name="heart" *ngIf="favorite" isActive="true"></ion-icon>
+        <ion-icon name="heart" *ngIf="!favorite" isActive="false"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="background">
+<ion-content class="background no-scroll">
 
   <ion-card *ngFor="let car of cars">
 

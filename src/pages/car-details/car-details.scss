@@ -2,6 +2,10 @@
     background-color: #f4f4f4;
 }
 
+.no-scroll .scroll-content{
+     overflow: hidden;
+}
+
 div.table {
     padding: 10px;
 }
