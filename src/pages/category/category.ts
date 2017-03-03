@@ -13,7 +13,7 @@ export class Category {
   constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage) {}
 
   listCars(category_id){
-    this.localStorage.setCategorySelected(category_id);
+    this.localStorage.setCategorySelectedId(category_id);
     this.navCtrl.push(CarList);
   }
 

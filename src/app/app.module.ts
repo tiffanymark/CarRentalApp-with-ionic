@@ -15,7 +15,7 @@ import { CreateAccount } from '../pages/create-account/create-account';
 import { Home } from '../pages/home/home';
 import { Localization } from '../pages/localization/localization';
 import { Profile } from '../pages/profile/profile';
-import { EditAccount } from '../pages/edit-account/edit-account';
+import { EditProfile } from '../pages/edit-profile/edit-profile';
 import { Category } from '../pages/category/category';
 import { CarList } from '../pages/car-list/car-list';
 import { CarDetails } from '../pages/car-details/car-details';
@@ -28,7 +28,7 @@ import { CarDetails } from '../pages/car-details/car-details';
     Home,
     Localization,
     Profile,
-    EditAccount,
+    EditProfile,
     Category,
     CarList,
     CarDetails
@@ -48,7 +48,7 @@ import { CarDetails } from '../pages/car-details/car-details';
     Home,
     Localization,
     Profile,
-    EditAccount,
+    EditProfile,
     Category,
     CarList,
     CarDetails

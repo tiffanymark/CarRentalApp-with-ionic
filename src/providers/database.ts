@@ -97,7 +97,7 @@ export class Database {
   searchCategory(id): Promise<any>{
     return this.db.executeSql("SELECT * FROM Category WHERE id = ?", [id]).then((category) => {
       console.log("CATEGORY: ", JSON.stringify(category));
-      return category.rows.item(0);
+      return category.rows.item(0).name;
     }, (error) => {
       console.error("UNABLE TO FIND CATEGORY: ", JSON.stringify(error));
     });
@@ -126,6 +126,19 @@ export class Database {
       return car.rows.item(0);
     }, (error) => {
       console.error("Unable to find car: ", JSON.stringify(error));
+    });
+  }
+
+  verifyAvailability(car_id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM Car WHERE id = ?", [car_id]).then((car) => {
+      if(car.rows.item(0).quantity > 0){
+        return true;
+      }
+      else {
+        return false;
+      }
+    }, (error) => {
+      console.error("UNABLE TO EXECUTE SQL: ", JSON.stringify(error));
     });
   }
 

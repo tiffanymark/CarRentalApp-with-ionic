@@ -21,30 +21,38 @@ export class CarList {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage) {
 
-    this.localStorage.getCategorySelected().then((category_id) => {
-      this.database.searchCategory(category_id).then((category) => {
-        this.categories = [{
-          id: category.id,
-          name: category.name
-        }];
-        this.database.listCarsByCategory(category.id).then((carsList) => {
-          this.cars = [];
-          for(let i = 0; i < carsList.rows.length; i++){
-            this.cars.push({
-              id: carsList.rows.item(i).id,
-              name: carsList.rows.item(i).name,
-              brand: carsList.rows.item(i).brand,
-              photo: carsList.rows.item(i).photo
-            });
-          }
-        });
-      });
-    });
+    this.initCarListPage();
 
   }
 
+  initCarListPage(){
+    this.localStorage.getCategorySelectedId().then((category_id) => {
+      this.database.searchCategory(category_id).then((category_name) => {
+        this.categories = [{
+          id: category_id,
+          name: category_name
+        }];
+        this.listCar(category_id);
+      });
+    });
+  }
+
+  listCar(category_id){
+    this.database.listCarsByCategory(category_id).then((carsList) => {
+      this.cars = [];
+      for(let i = 0; i < carsList.rows.length; i++){
+        this.cars.push({
+          id: carsList.rows.item(i).id,
+          name: carsList.rows.item(i).name,
+          brand: carsList.rows.item(i).brand,
+          photo: carsList.rows.item(i).photo
+        });
+      }
+    });
+  }
+
   moreDetails(car_id){
-    this.localStorage.setCarSelected(car_id);
+    this.localStorage.setCarSelectedId(car_id);
     this.navCtrl.push(CarDetails);
   }
 

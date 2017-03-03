@@ -38,19 +38,19 @@
   
   </ion-list>
 
-    <ion-list inset>
+    <ion-list inset *ngFor="let user of users">
       
-      <ion-item *ngFor="let user of users">
+      <ion-item>
         <ion-label stacked>Address</ion-label>
         <ion-input type="text" name="address" autocapitalize="words" [(ngModel)]="user.address" >{{user.address}}</ion-input>
       </ion-item>
 
-      <ion-item *ngFor="let user of users">
+      <ion-item>
         <ion-label stacked>Phone</ion-label>
         <ion-input type="text" name="phone" [(ngModel)]="user.phone" [textMask]="{mask: mask}" >{{user.phone}}</ion-input>
       </ion-item>
 
-      <ion-item *ngFor="let user of users">
+      <ion-item>
         <ion-label stacked>Email</ion-label>
         <ion-input type="text" name="email" autocapitalize="none" [(ngModel)]="user.email" >{{user.email}}</ion-input>
       </ion-item>

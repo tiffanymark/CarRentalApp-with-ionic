@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, ModalController, Events } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
-import { EditAccount } from '../edit-account/edit-account';
+import { EditProfile } from '../edit-profile/edit-profile';
 
 @Component({
   selector: 'page-profile',
@@ -21,15 +21,24 @@ export class Profile {
     photo: string
   }>;
 
-  id : any;
+  user_id : number;
 
   defaultPhotoPath: string = "assets/img/avatar.jpg";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController, public events: Events) {
     
+    this.initProfilePage();
+
+    this.events.subscribe('reloadProfile',() => {
+      this.navCtrl.setRoot(Profile);
+    });
+
+  }
+
+  initProfilePage(){
     this.localStorage.getUserId().then((user_id) => { 
-      this.id = user_id;
-      this.database.searchUser(this.id).then((user) => {
+      this.user_id = user_id;
+      this.database.searchUser(this.user_id).then((user) => {
         this.users = [{
           firstname: user.firstname,
           lastname: user.lastname,
@@ -42,15 +51,10 @@ export class Profile {
         }];
       });
     });
-
-    this.events.subscribe('reloadProfile',() => {
-      this.navCtrl.setRoot(Profile);
-    });
-
   }
 
   editAccount(){
-    let modal = this.modalCtrl.create(EditAccount);
+    let modal = this.modalCtrl.create(EditProfile);
     modal.present();
   }
 

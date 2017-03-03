@@ -14,10 +14,10 @@
 
 <ion-content padding class="back no-scroll">
 
-  <ion-card>
+  <ion-card *ngFor="let user of users">
 
     <ion-card-header>
-      <ion-item *ngFor="let user of users">
+      <ion-item>
       <ion-avatar item-left>
         <img class="profile-photo" src="{{pathForImage()}}">
       </ion-avatar>
@@ -26,21 +26,13 @@
     </ion-item>
     </ion-card-header>
 
-    <ion-item *ngFor="let user of users">
-      {{user.address}}
-    </ion-item>
+    <ion-item>{{user.address}}</ion-item>
 
-    <ion-item *ngFor="let user of users">
-      {{user.phone}}
-    </ion-item>
+    <ion-item>{{user.phone}}</ion-item>
 
-    <ion-item *ngFor="let user of users">
-      {{user.birthday}}
-    </ion-item>
+    <ion-item>{{user.birthday}}</ion-item>
 
-    <ion-item *ngFor="let user of users">
-      {{user.email}}
-    </ion-item>
+    <ion-item>{{user.email}}</ion-item>
 
   </ion-card>
 

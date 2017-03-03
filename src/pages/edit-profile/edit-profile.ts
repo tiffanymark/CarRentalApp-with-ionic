@@ -7,10 +7,10 @@ import { Camera, File, FilePath } from 'ionic-native';
 declare var cordova: any;
 
 @Component({
-  selector: 'page-edit-account',
-  templateUrl: 'edit-account.html'
+  selector: 'page-edit-profile',
+  templateUrl: 'edit-profile.html'
 })
-export class EditAccount {
+export class EditProfile {
 
   users: Array<{
     firstname: string,
@@ -22,7 +22,7 @@ export class EditAccount {
     username: string
   }>;
 
-  id: any;
+  user_id: number;
 
   public mask: Array<string | RegExp>
 
@@ -35,13 +35,19 @@ export class EditAccount {
   newPhotoPath: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public menuCtrl: MenuController, public events: Events, private localStorage : LocalStorage, private database: Database, public actionSheetCtrl: ActionSheetController, public  platform: Platform, public toastCtrl: ToastController) {
+    
     this.menuCtrl.enable(false, "logon");
 
     this.mask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
+    this.initEditProfilePage();
+
+  }
+
+  initEditProfilePage(){
     this.localStorage.getUserId().then((user_id) => {
-      this.id = user_id;
-      this.database.searchUser(this.id).then((user)=>{
+      this.user_id = user_id;
+      this.database.searchUser(this.user_id).then((user)=>{
         this.users = [{
           firstname: user.firstname,
           lastname: user.lastname,
@@ -54,7 +60,6 @@ export class EditAccount {
         this.verifyPhotoExistence();
       });
     });
-
   }
 
   dismiss(){
@@ -68,11 +73,11 @@ export class EditAccount {
     if(this.users[0].phone.toString().length > 15){
       this.users[0].phone = this.users[0].phone.slice(0,15);
     }
-    this.database.updateUserAccount(this.users[0].address, this.users[0].phone, this.users[0].email,this.id).then((data) => {
+    this.database.updateUserAccount(this.users[0].address, this.users[0].phone, this.users[0].email,this.user_id).then((data) => {
       console.log("UPDATED USER ACCOUNT");
     });
 
-    this.database.editProfilePhoto(this.newPhotoPath,this.id).then((data) => {
+    this.database.editProfilePhoto(this.newPhotoPath,this.user_id).then((data) => {
       console.log("SAVED NEW PHOTO ", data);
     });
     
@@ -186,7 +191,7 @@ export class EditAccount {
   }
 
   verifyPhotoExistence(){
-    this.database.searchUser(this.id).then((user) => {
+    this.database.searchUser(this.user_id).then((user) => {
       if(user.photo == null){
         this.lastImage = null;
         this.photoExistence = false;

@@ -29,19 +29,19 @@ export class LocalStorage {
     return this.storage.get("user_logon");
   }
 
-  setCategorySelected(category_id){
+  setCategorySelectedId(category_id){
     this.storage.set("category_id", category_id);
   }
 
-  getCategorySelected(): Promise<any>{
+  getCategorySelectedId(): Promise<any>{
     return this.storage.get("category_id");
   }
 
-  setCarSelected(car_id){
+  setCarSelectedId(car_id){
     this.storage.set("car_id",car_id);
   }
 
-  getCarSelected(): Promise<any>{
+  getCarSelectedId(): Promise<any>{
     return this.storage.get("car_id");
   }
 
