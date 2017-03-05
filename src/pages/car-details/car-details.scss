@@ -2,20 +2,36 @@
     background-color: #f4f4f4;
 }
 
-.no-scroll .scroll-content{
+ion-card#carDetailsCard {
+    height: 96%;
+}
+
+ion-car#carDetailsContent {
+    padding-block-end: 0px;
+}
+
+.no-scroll .scroll-content {
      overflow: hidden;
 }
 
+ion-icon.availability {
+    font-size: 16px;
+}
+
 div.table {
-    padding: 10px;
+    padding-left: 20px;
 }
 
 ion-col div.names {
-    padding: 5px;
+    padding: 3px;
     text-align: left;
 }
 
 ion-col div.values {
-    padding: 5px;
+    padding: 3px;
     text-align: center;
+}
+
+ion-col.bookCar {
+    padding-top: 0px;
 }

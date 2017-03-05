@@ -18,7 +18,8 @@ export class CarDetails {
     door: number,
     abs: boolean,
     airbag: boolean,
-    photo: string
+    photo: string,
+    availability: boolean
   }>;
 
   carSelected_id: number;
@@ -55,19 +56,22 @@ export class CarDetails {
   }
 
   listCarDetails(car_id){
-     this.database.searchCar(car_id).then((car) => {
-      this.cars = [{
-        name: car.name,
-        brand: car.brand,
-        size: car.size,
-        gearshift: car.gearshift,
-        ac: car.ac,
-        door: car.door,
-        abs: car.abs,
-        airbag: car.airbag,
-        photo: car.photo
-      }];
-      this.verifyIfFavoriteCarExists(this.user_id,this.carSelected_id);
+    this.database.searchCar(car_id).then((car) => {
+      this.database.verifyAvailability(car_id).then((carIsAvailable) => {
+        this.cars = [{
+          name: car.name,
+          brand: car.brand,
+          size: car.size,
+          gearshift: car.gearshift,
+          ac: car.ac,
+          door: car.door,
+          abs: car.abs,
+          airbag: car.airbag,
+          photo: car.photo,
+          availability: carIsAvailable
+        }];
+        this.verifyIfFavoriteCarExists(this.user_id,this.carSelected_id);
+       });
     });
   }
 

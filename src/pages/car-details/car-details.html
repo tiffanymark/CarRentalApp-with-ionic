@@ -13,17 +13,25 @@
 
 <ion-content class="background no-scroll">
 
-  <ion-card *ngFor="let car of cars">
+  <ion-card id="carDetailsCard" *ngFor="let car of cars">
 
     <img src={{car.photo}} height="240px" width="300px"/>
 
-    <ion-card-content>
-      <ion-card-title>
-        {{car.name}}
-      </ion-card-title>
-      <p>
-        {{car.brand}}
-      </p>
+    <ion-card-content id="carDetailsContent">
+
+      <ion-row>
+        <ion-col text-left>
+          <ion-card-title>{{car.brand}} {{car.name}}</ion-card-title>
+        </ion-col>
+
+        <ion-col *ngIf="car.availability" text-right>
+          <ion-card-title><ion-icon name="checkmark-circle" class="availability" color="secondary2"></ion-icon> Available </ion-card-title>
+        </ion-col>
+        <ion-col *ngIf="!car.availability" text-right>
+          <ion-card-title><ion-icon name="close-circle" class="availability" color="danger2"></ion-icon> Not available </ion-card-title>
+        </ion-col>
+
+      </ion-row>
 
       <div class="table">
         <ion-row>
@@ -91,6 +99,21 @@
       </div>
 
     </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col *ngIf="car.availability" class="bookCar" text-center>
+        <button ion-button clear color="danger2" (click)="bookCar(car.id)" icon-left>
+          <ion-icon name='bookmarks' isActive="false"></ion-icon>
+          Book Car
+        </button>
+      </ion-col>
+      <ion-col *ngIf="!car.availability" class="bookCar" text-center>
+        <button ion-button clear color="danger2" [disabled]="true" icon-left>
+          <ion-icon name='bookmarks' isActive="false"></ion-icon>
+          Book Car
+        </button>
+      </ion-col>
+    </ion-row>
 
   </ion-card>
 

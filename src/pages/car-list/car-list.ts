@@ -16,7 +16,9 @@ export class CarList {
     id: number,
     name: string,
     brand: string,
-    photo: string
+    photo: string,
+    quantity: number,
+    availability: boolean
   }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage) {
@@ -41,11 +43,15 @@ export class CarList {
     this.database.listCarsByCategory(category_id).then((carsList) => {
       this.cars = [];
       for(let i = 0; i < carsList.rows.length; i++){
-        this.cars.push({
-          id: carsList.rows.item(i).id,
-          name: carsList.rows.item(i).name,
-          brand: carsList.rows.item(i).brand,
-          photo: carsList.rows.item(i).photo
+        this.database.verifyAvailability(carsList.rows.item(i).id).then((carIsAvailable) => {
+          this.cars.push({
+            id: carsList.rows.item(i).id,
+            name: carsList.rows.item(i).name,
+            brand: carsList.rows.item(i).brand,
+            photo: carsList.rows.item(i).photo,
+            quantity: carsList.rows.item(i).quantity,
+            availability: carIsAvailable
+          });
         });
       }
     });

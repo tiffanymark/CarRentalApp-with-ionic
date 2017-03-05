@@ -12,20 +12,28 @@
     <img src={{car.photo}} height="240px" width="300px"/>
 
     <ion-card-content>
-      <ion-card-title>
-        {{car.name}}
-      </ion-card-title>
-      <p>
-        {{car.brand}}
-      </p>
+
+      <ion-row>
+        <ion-col text-left>
+          <ion-card-title>{{car.brand}} {{car.name}}</ion-card-title>
+        </ion-col>
+      
+        <ion-col *ngIf="car.availability" text-right>
+          <ion-card-title><ion-icon name="checkmark-circle" class="availability" color="secondary2"></ion-icon> Available </ion-card-title>
+        </ion-col>
+        <ion-col *ngIf="!car.availability" text-right>
+          <ion-card-title><ion-icon name="close-circle" class="availability" color="danger2"></ion-icon> Not available </ion-card-title>
+        </ion-col>
+      </ion-row>
+
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col text-center>
-      <button ion-button clear color="danger2" (click)="moreDetails(car.id)" icon-left>
-        <ion-icon name='list-box' isActive="false"></ion-icon>
-        More Details
-      </button>
+        <button ion-button clear color="danger2" (click)="moreDetails(car.id)" icon-left>
+          <ion-icon name='list-box' isActive="false"></ion-icon>
+          More Details
+        </button>
       </ion-col>
     </ion-row>
 
