@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
 import { CarList } from '../car-list/car-list';
@@ -10,7 +10,9 @@ import { CarList } from '../car-list/car-list';
 })
 export class Category {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private database: Database, private localStorage: LocalStorage) {
+    this.menuCtrl.enable(true, "logon");
+  }
 
   listCars(category_id){
     this.localStorage.setCategorySelectedId(category_id);

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Events, ViewController } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
+import { BookCar } from '../book-car/book-car';
 
 @Component({
   selector: 'page-car-details',
@@ -32,9 +33,12 @@ export class CarDetails {
   
   favorite: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private database: Database, private localStorage: LocalStorage, public modalCtrl: ModalController, public events: Events, public viewCtrl: ViewController) {
     
     this.initCarDetailsPage();
+
+    this.events.subscribe('reloadCarDetails',() => {
+    });
 
   }
 
@@ -100,6 +104,11 @@ export class CarDetails {
           });
         }
       });
+  }
+
+  bookCar(){
+    let modal = this.modalCtrl.create(BookCar);
+    modal.present();
   }
 
 

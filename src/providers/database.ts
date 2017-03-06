@@ -142,6 +142,22 @@ export class Database {
     });
   }
 
+  verifyCarQauntity(car_id): Promise<any>{
+    return this.db.executeSql("SELECT * FROM Car WHERE id = ?", [car_id]).then((car) => {
+      return car.rows.item(0).quantity;
+    }, (error) => {
+      console.error("UNABLE TO EXECUTE SQL: ", JSON.stringify(error));
+    });
+  }
+
+  updateCarQuantity(quantity,car_id): Promise<any>{
+    return this.db.executeSql("UPDATE Car SET quantity = ? WHERE id = ?", [quantity,car_id]).then((data) => {
+      console.log("CAR QUANTITY UPDATED: ", JSON.stringify(data));
+    }, (error) => {
+      console.error("UNABLE TO UPDATE CAR QUANTITY: ", JSON.stringify(error));
+    });
+  }
+
   tryInitFavoriteCar(){
     this.db.executeSql("CREATE TABLE IF NOT EXISTS FavoriteCar (id INTEGER PRIMARY KEY AUTOINCREMENT, user INTEGER, car INTEGER)", {}).then((data) => {
       console.log("TABLE FavoriteCar CREATED", JSON.stringify(data));

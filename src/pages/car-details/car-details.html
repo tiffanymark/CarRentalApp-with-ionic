@@ -101,13 +101,13 @@
     </ion-card-content>
 
     <ion-row no-padding>
-      <ion-col *ngIf="car.availability" class="bookCar" text-center>
-        <button ion-button clear color="danger2" (click)="bookCar(car.id)" icon-left>
+      <ion-col *ngIf="car.availability" class="bookCarButton" text-center>
+        <button ion-button clear color="danger2" (click)="bookCar()" icon-left>
           <ion-icon name='bookmarks' isActive="false"></ion-icon>
           Book Car
         </button>
       </ion-col>
-      <ion-col *ngIf="!car.availability" class="bookCar" text-center>
+      <ion-col *ngIf="!car.availability" class="bookCarButton" text-center>
         <button ion-button clear color="danger2" [disabled]="true" icon-left>
           <ion-icon name='bookmarks' isActive="false"></ion-icon>
           Book Car

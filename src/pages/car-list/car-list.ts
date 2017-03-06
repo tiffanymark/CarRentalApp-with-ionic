@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Database } from '../../providers/database';
 import { LocalStorage } from '../../providers/local-storage';
-import { CarDetails } from '../car-details/car-details'
+import { CarDetails } from '../car-details/car-details';
 
 @Component({
   selector: 'page-car-list',
